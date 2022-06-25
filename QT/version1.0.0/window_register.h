@@ -15,6 +15,15 @@ public:
     explicit window_register(QWidget *parent = nullptr);
     ~window_register();
 
+private slots:
+    void on_lineEdit_textChanged(const QString &arg1);
+
+    void on_lineEdit_2_textChanged(const QString &arg1);
+
+    void on_lineEdit_3_textChanged(const QString &arg1);
+
+    void on_pushButton_clicked();
+
 private:
     Ui::window_register *ui;
 };
