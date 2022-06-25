@@ -104,6 +104,8 @@ private slots:
 
     void on_radioButton_20_clicked();
 
+    void on_action_save_data_normal_triggered();
+
 private:
     Ui::MainWindow *ui;
     window_input_information *input_info;

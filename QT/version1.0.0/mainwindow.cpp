@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -257,5 +258,16 @@ void MainWindow::on_radioButton_19_clicked()
 void MainWindow::on_radioButton_20_clicked()
 {
     //模式选择->在线模式
+}
+
+
+void MainWindow::on_action_save_data_normal_triggered()
+{
+    //菜单->导出数据
+    QMessageBox::information(this,
+                             tr("操作成功"),
+                             tr("操作成功"),
+                             QMessageBox::Ok);
+    //上方代码是用于验证菜单栏是否响应的操作
 }
 
