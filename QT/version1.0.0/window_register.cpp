@@ -1,5 +1,10 @@
+
 #include "window_register.h"
 #include "ui_window_register.h"
+
+
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 window_register::window_register(QWidget *parent) :
     QMainWindow(parent),

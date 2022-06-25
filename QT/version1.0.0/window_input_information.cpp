@@ -1,5 +1,9 @@
+
 #include "window_input_information.h"
 #include "ui_window_input_information.h"
+
+#include "mainwindow.h"
+#include "ui_mainwindow.h"
 
 window_input_information::window_input_information(QWidget *parent) :
     QMainWindow(parent),
