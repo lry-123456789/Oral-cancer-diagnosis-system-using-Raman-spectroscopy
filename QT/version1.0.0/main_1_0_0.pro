@@ -10,13 +10,22 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    window_input_information.cpp \
+    window_login.cpp \
+    window_register.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    window_input_information.h \
+    window_login.h \
+    window_register.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    window_input_information.ui \
+    window_login.ui \
+    window_register.ui
 
 TRANSLATIONS += \
     main_1_0_0_zh_CN.ts
