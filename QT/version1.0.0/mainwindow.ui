@@ -532,7 +532,7 @@
       <widget class="QPushButton" name="pushButton_6">
        <property name="geometry">
         <rect>
-         <x>110</x>
+         <x>120</x>
          <y>20</y>
          <width>75</width>
          <height>24</height>
@@ -663,9 +663,9 @@
      <widget class="QGroupBox" name="groupBox_11">
       <property name="geometry">
        <rect>
-        <x>130</x>
+        <x>170</x>
         <y>20</y>
-        <width>321</width>
+        <width>281</width>
         <height>51</height>
        </rect>
       </property>
@@ -675,7 +675,7 @@
       <widget class="QPushButton" name="pushButton_12">
        <property name="geometry">
         <rect>
-         <x>10</x>
+         <x>40</x>
          <y>20</y>
          <width>75</width>
          <height>24</height>
@@ -688,7 +688,7 @@
       <widget class="QPushButton" name="pushButton_13">
        <property name="geometry">
         <rect>
-         <x>90</x>
+         <x>170</x>
          <y>20</y>
          <width>75</width>
          <height>24</height>
@@ -696,19 +696,6 @@
        </property>
        <property name="text">
         <string>下载数据</string>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="pushButton_14">
-       <property name="geometry">
-        <rect>
-         <x>170</x>
-         <y>20</y>
-         <width>141</width>
-         <height>24</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>识别数据并检测</string>
        </property>
       </widget>
      </widget>

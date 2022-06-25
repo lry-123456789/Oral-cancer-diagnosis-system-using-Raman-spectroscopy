@@ -21,6 +21,89 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void on_graphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint);
+
+    void on_textBrowser_anchorClicked(const QUrl &arg1);
+
+    void on_radioButton_clicked();
+
+    void on_radioButton_2_clicked();
+
+    void on_radioButton_3_clicked();
+
+    void on_radioButton_4_clicked();
+
+    void on_progressBar_valueChanged(int value);
+
+    void on_progressBar_2_valueChanged(int value);
+
+    void on_progressBar_3_valueChanged(int value);
+
+    void on_progressBar_4_valueChanged(int value);
+
+    void on_radioButton_5_clicked();
+
+    void on_radioButton_6_clicked();
+
+    void on_radioButton_7_clicked();
+
+    void on_radioButton_9_clicked();
+
+    void on_radioButton_10_clicked();
+
+    void on_radioButton_8_clicked();
+
+    void on_radioButton_12_clicked();
+
+    void on_radioButton_13_clicked();
+
+    void on_radioButton_11_clicked();
+
+    void on_radioButton_15_clicked();
+
+    void on_radioButton_16_clicked();
+
+    void on_radioButton_14_clicked();
+
+    void on_radioButton_18_clicked();
+
+    void on_radioButton_17_clicked();
+
+    void on_lineEdit_textChanged(const QString &arg1);
+
+    void on_pushButton_clicked();
+
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_3_clicked();
+
+    void on_pushButton_4_clicked();
+
+    void on_pushButton_7_clicked();
+
+    void on_pushButton_5_clicked();
+
+    void on_pushButton_6_clicked();
+
+    void on_pushButton_8_clicked();
+
+    void on_pushButton_9_clicked();
+
+    void on_pushButton_10_clicked();
+
+    void on_pushButton_11_clicked();
+
+    void on_pushButton_12_clicked();
+
+    void on_pushButton_13_clicked();
+
+    void on_pushButton_14_clicked();
+
+    void on_radioButton_19_clicked();
+
+    void on_radioButton_20_clicked();
+
 private:
     Ui::MainWindow *ui;
     window_input_information *input_info;
