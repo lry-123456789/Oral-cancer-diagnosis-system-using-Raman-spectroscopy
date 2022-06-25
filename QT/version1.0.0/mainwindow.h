@@ -106,6 +106,26 @@ private slots:
 
     void on_action_save_data_normal_triggered();
 
+    void on_action_save_all_data_triggered();
+
+    void on_action_input_file_triggered();
+
+    void on_action_input_information_triggered();
+
+    void on_action_show_information_triggered();
+
+    void on_action_show_status_program_triggered();
+
+    void on_action_clear_window_triggered();
+
+    void on_action_exit_triggered();
+
+    void on_action_self_check_triggered();
+
+    void on_action_program_information_triggered();
+
+    void on_action_visit_website_triggered();
+
 private:
     Ui::MainWindow *ui;
     window_input_information *input_info;

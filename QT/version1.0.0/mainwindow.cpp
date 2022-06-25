@@ -271,3 +271,68 @@ void MainWindow::on_action_save_data_normal_triggered()
     //上方代码是用于验证菜单栏是否响应的操作
 }
 
+
+void MainWindow::on_action_save_all_data_triggered()
+{
+    //菜单->导出文件全部信息
+}
+
+
+void MainWindow::on_action_input_file_triggered()
+{
+    //菜单->导入文件
+}
+
+
+void MainWindow::on_action_input_information_triggered()
+{
+    //菜单->导入病人信息
+    //此处可用不隐藏当前窗口，直接在本窗口界面上方创建一个新的界面，用于后续操作
+    window_input_information *main_input;
+    main_input=new window_input_information();
+    main_input->setWindowTitle("病人信息导入");
+    main_input->show();
+}
+
+
+void MainWindow::on_action_show_information_triggered()
+{
+    //菜单->显示病人信息
+}
+
+
+void MainWindow::on_action_show_status_program_triggered()
+{
+    //菜单->显示程序目前参数以及状态
+}
+
+
+void MainWindow::on_action_clear_window_triggered()
+{
+    //菜单->程序屏幕状态清除
+}
+
+
+void MainWindow::on_action_exit_triggered()
+{
+    //菜单->安全退出本程序
+}
+
+
+void MainWindow::on_action_self_check_triggered()
+{
+    //菜单->程序功能自检
+}
+
+
+void MainWindow::on_action_program_information_triggered()
+{
+    //菜单->程序信息
+}
+
+
+void MainWindow::on_action_visit_website_triggered()
+{
+    //菜单->转到程序官网
+}
+

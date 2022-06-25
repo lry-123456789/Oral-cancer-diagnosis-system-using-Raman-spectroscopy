@@ -770,9 +770,17 @@ p, li { white-space: pre-wrap; }
     <addaction name="separator"/>
     <addaction name="action_exit"/>
    </widget>
+   <widget class="QMenu" name="menu_4">
+    <property name="title">
+     <string>关于</string>
+    </property>
+    <addaction name="action_program_information"/>
+    <addaction name="action_visit_website"/>
+   </widget>
    <addaction name="menu"/>
    <addaction name="menu_2"/>
    <addaction name="menu_3"/>
+   <addaction name="menu_4"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_save_data_normal">
@@ -839,6 +847,16 @@ p, li { white-space: pre-wrap; }
   <action name="action_self_check">
    <property name="text">
     <string>程序功能自检</string>
+   </property>
+  </action>
+  <action name="action_program_information">
+   <property name="text">
+    <string>程序信息</string>
+   </property>
+  </action>
+  <action name="action_visit_website">
+   <property name="text">
+    <string>程序官网</string>
    </property>
   </action>
  </widget>
