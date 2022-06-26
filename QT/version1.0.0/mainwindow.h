@@ -126,6 +126,11 @@ private slots:
 
     void on_action_visit_website_triggered();
 
+
+    void on_textBrowser_historyChanged();
+
+    void on_radioButton_21_clicked();
+
 private:
     Ui::MainWindow *ui;
     window_input_information *input_info;

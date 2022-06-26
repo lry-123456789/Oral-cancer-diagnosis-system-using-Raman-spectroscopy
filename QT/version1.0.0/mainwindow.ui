@@ -180,6 +180,19 @@
       <enum>Qt::Vertical</enum>
      </property>
     </widget>
+    <widget class="QRadioButton" name="radioButton_21">
+     <property name="geometry">
+      <rect>
+       <x>650</x>
+       <y>20</y>
+       <width>95</width>
+       <height>20</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>保留</string>
+     </property>
+    </widget>
    </widget>
    <widget class="QGroupBox" name="groupBox_3">
     <property name="geometry">

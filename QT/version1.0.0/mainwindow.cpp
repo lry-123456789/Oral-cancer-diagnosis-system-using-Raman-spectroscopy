@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+#include <QFile>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -310,23 +311,73 @@ void MainWindow::on_action_show_status_program_triggered()
 void MainWindow::on_action_clear_window_triggered()
 {
     //菜单->程序屏幕状态清除
+    ui->textBrowser->setText("程序已经完成当前状态清除");
+    //清除图像显示区域
+    ui->graphicsView->clearFocus();
+    ui->graphicsView->clearMask();
+    //清除程序状态输出
+    ui->textBrowser->setText("程序已经完成当前状态清除");
+    //清除检测结果
+    ui->progressBar->setValue(25);
+    ui->progressBar_2->setValue(25);
+    ui->progressBar_3->setValue(25);
+    ui->progressBar_4->setValue(25);
+    ui->radioButton_21->click();
+    //将4种检测结果的置信度重新设置为25%
+    //模型选择部分不做出改动
+    //关闭病人信息检测模块
+    //主程序控制部分不做出改变
+    QMessageBox::information(this,
+                             tr("程序信息"),
+                             tr("当前状态清除完成"),
+                             QMessageBox::Ok);
+    ui->textBrowser->setText("");
 }
 
 
 void MainWindow::on_action_exit_triggered()
 {
     //菜单->安全退出本程序
+    this->close();
+    exit(0);
 }
 
 
 void MainWindow::on_action_self_check_triggered()
 {
     //菜单->程序功能自检
+    QFile file0("data.db");                 //存储光谱数据的数据库文件
+    QFile file1("account.db");              //存储用户名和密码的数据库文件
+    QFile file2("sqlite3.dll");             //操作数据库所需要的动态库连接文件
+    QFile file3("D3Dcomplier_47.dll");      //动态库连接文件
+    QFile file4("libgcc_s_seh-1.dll");      //动态库连接文件
+    QFile file5("linstdc++-6.dll");         //动态库连接文件
+    QFile file6("libwinpthread-1.dll");     //动态库连接文件
+    QFile file7("opengl32sw.dll");          //动态库连接文件
+    QFile file8("Qt6Core.dll");             //动态库连接文件
+    QFile file9("Qt6Gui.dll");              //动态库连接文件
+    QFile file10("Qt6Svg.dll");             //动态库连接文件
+    QFile file11("Qt6Widgets.dll");         //动态库连接文件
+    QFile file12("iconengines/qsvgicon.dll");   //动态库连接文件
+    QFile file13("imageformats/qgit.dll");      //动态库连接文件
+    QFile file14("imageformats/qico.dll");      //动态库连接文件
+    QFile file15("imageformats/qjpeg.dll");     //动态库连接文件
+    QFile file16("imageformats/qsvg.dll");      //动态库连接文件
+    QFile file17("platforms/qwindows.dll");     //动态库连接文件
+    QFile file18("styles/qwindowsvistastyle.dll");      //动态库连接文件
+    /*********************************\
+     * 下面是程序内置的模型文件
+    \*********************************/
+
 }
 
 
 void MainWindow::on_action_program_information_triggered()
 {
+    QMessageBox::information(this,
+                             tr("程序信息"),
+                             tr("关于：\n应用拉曼光谱的口腔癌诊断系统\nversion1.0.0\nbuild22626\ncopyright (c) 2020~2022"),
+                             QMessageBox::Ok);
     //菜单->程序信息
 }
 
@@ -334,5 +385,17 @@ void MainWindow::on_action_program_information_triggered()
 void MainWindow::on_action_visit_website_triggered()
 {
     //菜单->转到程序官网
+}
+
+
+void MainWindow::on_textBrowser_historyChanged()
+{
+    //主界面->程序信息输出
+}
+
+
+void MainWindow::on_radioButton_21_clicked()
+{
+    //识别状态->保留
 }
 
