@@ -2,6 +2,9 @@
 #include "ui_mainwindow.h"
 #include <QMessageBox>
 #include <QFile>
+#include <stdlib.h>
+#include <QFileDialog>
+#include <Qdebug>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -159,18 +162,43 @@ void MainWindow::on_radioButton_17_clicked()
     //模型选择->others(当且仅当本选项选中时，可以进行模型选择操作)
 }
 
-
+/*
 void MainWindow::on_lineEdit_textChanged(const QString &arg1)
 {
     //用于显示本程序在选择others时所调用的文件路径（禁止写入，由下一个button按钮写入）
+    ui->lineEdit->setReadOnly(true);
 }
 
 
 void MainWindow::on_pushButton_clicked()
 {
     //模型选择:仅选择others时可用，将文件路径输出到lineedit中
+    QString filename = QFileDialog::getOpenFileName(this,
+                                                    tr("请选择文件"),
+                                                    "C:",
+                                                    tr("模型文件(*pt)"));
+    qDebug()<<"filename="<<filename;
+    if(filename=="")
+    {
+        QMessageBox::critical(this,
+                              tr("错误"),
+                              tr("未选择文件"),
+                              QMessageBox::Ok);
+    }
+    else
+    {
+       //开启lineedit的写入
+       ui->lineEdit->setReadOnly(false);
+       ui->lineEdit->setText(filename);
+       //关闭lineedit的写入
+       ui->lineEdit->setReadOnly(true);
+       QMessageBox::information(this,
+                                tr("提示"),
+                                tr("模型导入成功"),
+                                QMessageBox::Ok);
+    }
 }
-
+*/
 
 void MainWindow::on_pushButton_2_clicked()
 {
@@ -385,6 +413,7 @@ void MainWindow::on_action_program_information_triggered()
 void MainWindow::on_action_visit_website_triggered()
 {
     //菜单->转到程序官网
+
 }
 
 

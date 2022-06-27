@@ -69,11 +69,11 @@ private slots:
     void on_radioButton_18_clicked();
 
     void on_radioButton_17_clicked();
-
+/*
     void on_lineEdit_textChanged(const QString &arg1);
 
     void on_pushButton_clicked();
-
+*/
     void on_pushButton_2_clicked();
 
     void on_pushButton_3_clicked();
