@@ -137,4 +137,5 @@ private:
     window_login *login_sys;
     window_register *register_sys;
 };
+
 #endif // MAINWINDOW_H

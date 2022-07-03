@@ -10,6 +10,7 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    SqliteOperator.cpp \
     main.cpp \
     mainwindow.cpp \
     window_input_information.cpp \
@@ -17,6 +18,7 @@ SOURCES += \
     window_register.cpp
 
 HEADERS += \
+    SqliteOperator.h \
     mainwindow.h \
     window_input_information.h \
     window_login.h \

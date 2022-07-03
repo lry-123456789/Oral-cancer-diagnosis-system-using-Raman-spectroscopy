@@ -4,6 +4,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+
 
 window_login::window_login(QWidget *parent) :
     QMainWindow(parent),

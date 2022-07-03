@@ -1,3 +1,6 @@
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
 
 #include "window_input_information.h"
 #include "ui_window_input_information.h"

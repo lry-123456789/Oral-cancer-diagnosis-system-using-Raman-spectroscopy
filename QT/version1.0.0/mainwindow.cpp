@@ -4,7 +4,11 @@
 #include <QFile>
 #include <stdlib.h>
 #include <QFileDialog>
-#include <Qdebug>
+#include <QDebug>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)

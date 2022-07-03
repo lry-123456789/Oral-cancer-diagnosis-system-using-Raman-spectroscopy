@@ -6,6 +6,10 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <QMessageBox>
+#include <QSqlDatabase>
+#include <QSqlError>
+#include <QSqlQuery>
+
 
 window_register::window_register(QWidget *parent) :
     QMainWindow(parent),
