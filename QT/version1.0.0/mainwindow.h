@@ -131,6 +131,16 @@ private slots:
 
     void on_radioButton_21_clicked();
 
+    void on_radioButton_22_clicked();
+
+    void on_radioButton_23_clicked();
+
+    void on_radioButton_24_clicked();
+
+    void on_radioButton_25_clicked();
+
+    void on_radioButton_26_clicked();
+
 private:
     Ui::MainWindow *ui;
     window_input_information *input_info;
