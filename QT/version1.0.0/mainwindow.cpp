@@ -8,20 +8,38 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
+#include <stdio.h>
 
-typedef struct
+
+int Spectrograph=0;                   //值为0，光谱仪关闭，值为1，光谱仪启动
+int laser=0;                          //值为0，激光器关闭，值为1，激光器启动
+int Baud_rate=0;                      //储存连接的波特率，值为波特率（hz）
+int Integral_time=0;                  //积分时间设定，值为积分时间(ms)
+int Excitation_wavelength=0;          //激发波长设定，值为激发波长(nm)
+int Distance=0;                       //激发距离设定，值为激发距离(mm)
+int mode_choose=0;                    //模式选择，值为0，离线模式，值为1，在线模式，值为2，自动检测模式（连接成功后自动切换为1，否则切换为0）
+int choose_model=0;                   //模型选择，值为(14~18,前13个保留<也可以调用模型>)14->mobilenet15->resnet5016->transformer17->vgg18->inception
+int rec_result=0;                     //识别结果，值为(0~4)0->没有检测出结果1->正常组织，2->舌癌，3->颊癌，4->牙龈癌;(-1=程序出错，无法调用模型)
+
+//上述变量为全局变量
+//下面开始进行程序的启动初始化操作
+bool __init__(void)
 {
-    int Spectrograph;                   //值为0，光谱仪关闭，值为1，光谱仪启动
-    int laser;                          //值为0，激光器关闭，值为1，激光器启动
-    int Baud_rate;                      //储存连接的波特率，值为波特率（hz）
-    int Integral_time;                  //积分时间设定，值为积分时间(ms)
-    int Excitation_wavelength;          //激发波长设定，值为激发波长(nm)
-    int Distance;                       //激发距离设定，值为激发距离(mm)
-    int mode_choose;                    //模式选择，值为0，离线模式，值为1，在线模式，值为2，自动检测模式（连接成功后自动切换为1，否则切换为0）
-    int choose_model;                   //模型选择，值为(14~18,前13个保留<也可以调用模型>)14->mobilenet15->resnet5016->transformer17->vgg18->inception
-    int rec_result;                     //识别结果，值为(0~4)0->没有检测出结果1->正常组织，2->舌癌，3->颊癌，4->牙龈癌;(-1=程序出错，无法调用模型)
-}PROGRAM_STATUS;
-
+    Spectrograph=0;
+    laser=0;
+    Baud_rate=0;
+    Integral_time=0;
+    Excitation_wavelength=0;
+    Distance=0;
+    mode_choose=0;
+    choose_model=0;
+    rec_result=0;
+    if(!Spectrograph&&!laser&&!Baud_rate&&!Integral_time&&!Excitation_wavelength&&!Distance&&!mode_choose&&!choose_model&&!rec_result)
+    {
+        return true;
+    }
+    return false;
+}
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -430,7 +448,7 @@ void MainWindow::on_action_program_information_triggered()
 void MainWindow::on_action_visit_website_triggered()
 {
     //菜单->转到程序官网
-
+    system("start https://github.com/lry-123456789/Oral-cancer-diagnosis-system-using-Raman-spectroscopy");
 }
 
 
