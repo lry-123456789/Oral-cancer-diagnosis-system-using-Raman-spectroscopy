@@ -23,7 +23,7 @@ int rec_result=0;                     //识别结果，值为(0~4)0->没有检�
 
 //上述变量为全局变量
 //下面开始进行程序的启动初始化操作
-bool __init__(void)
+bool __init__(void)                     //程序初始化
 {
     Spectrograph=0;
     laser=0;
