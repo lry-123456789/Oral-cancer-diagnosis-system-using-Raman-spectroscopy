@@ -103,7 +103,7 @@ bool SqliteOperator_user_account::isTableExisted_register(QString& account)
     }
 }
 
-void SqliteOperator_user_account::insertData(user_account &data)
+void SqliteOperator_user_account::insertData(USER_ACCOUNT data)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO ACCOUNT_AND_PASSWORD VALUES(:ACCOUNT,:PASSWORD)");
@@ -135,7 +135,7 @@ void SqliteOperator_user_account::modifyData(QString ACCOUNT,QString PASSWORD)
     }
 }
 
-void SqliteOperator_user_account::deleteTable(QString& tableName)
+void SqliteOperator_user_account::deleteTable(QString tableName)
 {
     QSqlQuery query;
     query.exec(QString("DROP TABLE %1").arg(tableName));
@@ -222,7 +222,7 @@ bool SqliteOperator_patient_info::isTableExisted_patient(QString& tableName)
     return false;
 }
 
-void SqliteOperator_patient_info::singleInsertData(patient_info &patient)
+void SqliteOperator_patient_info::singleInsertData(PATIENT_INFO patient)
 {
     QSqlQuery query;
     query.prepare("INSERT INTO PATIENT_INFO VALUES(:NAME,:GENDER,:AGE,:TIME,:PART,:BAD)");
@@ -242,7 +242,7 @@ void SqliteOperator_patient_info::singleInsertData(patient_info &patient)
     }
 }
 
-void SqliteOperator_patient_info::modifyData(patient_info& patient)
+void SqliteOperator_patient_info::modifyData(PATIENT_INFO patient)
 {
     QSqlQuery query;
     query.prepare("UPDATE PATIENT_INFO NAME=?,GENDER=?,AGE=?,TIME=?,PART=?,BAD=?");
@@ -276,7 +276,7 @@ void SqliteOperator_patient_info::deleteData(int id)
     }
 }
 
-void SqliteOperator_patient_info::deleteTable(QString &tableName)
+void SqliteOperator_patient_info::deleteTable(QString tableName)
 {
     QSqlQuery query;
     query.exec(QString("DROP TABLE %1").arg(tableName));
@@ -347,7 +347,7 @@ bool SqliteOperator_Spectrum_info::createTable(void)
     }
 }
 
-bool SqliteOperator_Spectrum_info::isTableExist(QString& tableName)
+bool SqliteOperator_Spectrum_info::isTableExist(QString tableName)
 {
     QSqlDatabase database=QSqlDatabase::database();
     if(database.tables().contains(tableName))
@@ -357,7 +357,7 @@ bool SqliteOperator_Spectrum_info::isTableExist(QString& tableName)
     return false;
 }
 
-void SqliteOperator_Spectrum_info::singleInsertData(Spectrum_info& data)
+void SqliteOperator_Spectrum_info::singleInsertData(SPECTRUM_INFO data)
 {
     QByteArray data_0;
     int i=0;
@@ -382,7 +382,7 @@ void SqliteOperator_Spectrum_info::singleInsertData(Spectrum_info& data)
     }
 }
 
-void SqliteOperator_Spectrum_info::modifyData(Spectrum_info& data)
+void SqliteOperator_Spectrum_info::modifyData(SPECTRUM_INFO data)
 {
     QByteArray data_0;
     int i=0;
@@ -420,7 +420,7 @@ void SqliteOperator_Spectrum_info::deleteData(int id)
     }
 }
 
-void SqliteOperator_Spectrum_info::deleteTable(QString &tableName)
+void SqliteOperator_Spectrum_info::deleteTable(QString tableName)
 {
     QSqlQuery query;
     query.exec(QString("DROP TABLE %1").arg(tableName));
