@@ -1,3 +1,1 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.1" language="zh_CN"></TS>
+rebuild <2022.7.7.21.55>
