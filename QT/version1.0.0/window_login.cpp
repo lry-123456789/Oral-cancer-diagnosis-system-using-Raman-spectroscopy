@@ -7,7 +7,7 @@
 #include <QSqlDatabase>
 #include <QSqlError>
 #include <QSqlQuery>
-
+#include <SqliteOperator.h>
 
 window_login::window_login(QWidget *parent) :
     QMainWindow(parent),
@@ -59,21 +59,53 @@ void window_login::on_pushButton_clicked()
          * 在此处将用户输入的账号和密码与数据库中的账号密码进行对比
          * 如果对比成功，则进入主界面，否则弹窗报错
         \*************************************/
-
+        SqliteOperator_user_account query;
+        //打开数据库
+        query.openDb();
+        //开始对比数据库中时候存在用户名和密码
+        if(query.isTableExisted_login(ACCOUNT,PASSWORD)==false)
+        {
+            //用户名或密码不存在
+            QMessageBox::information(this,
+                                     tr("错误"),
+                                     tr("用户名或密码不存在，请重新输入"),
+                                     QMessageBox::Ok);
+        }
+        else
+        {
+            //登录成功后关闭本界面
+            MainWindow *w;
+            w = new MainWindow();
+            w->setWindowTitle("应用拉曼光谱的口腔癌诊断系统 v1.0.0");
+            //this->close();            //本方法不适用，程序会加载主界面，1s后自动退出
+            /*
+             * 此处出现了同样的问题，说明可能不是上述close()或hide()方法引起的异常情况
+            //this->hide();
+            //w.show();
+            */
+            //此处考虑使用new语句新建一个窗口
+            w->show();
+            //隐藏本界面
+            this->hide();
+            //成功登录到本系统
+        }
+        /******************\
         //登录成功后关闭本界面
         MainWindow *w;
         w = new MainWindow();
         w->setWindowTitle("应用拉曼光谱的口腔癌诊断系统 v1.0.0");
         //this->close();            //本方法不适用，程序会加载主界面，1s后自动退出
-        /*
-         * 此处出现了同样的问题，说明可能不是上述close()或hide()方法引起的异常情况
+        ///*
+        // * 此处出现了同样的问题，说明可能不是上述close()或hide()方法引起的异常情况
         //this->hide();
         //w.show();
-        */
+        //*/
         //此处考虑使用new语句新建一个窗口
+        /*********************8\
         w->show();
         //隐藏本界面
         this->hide();
+        \********************************/
     }
 }
 

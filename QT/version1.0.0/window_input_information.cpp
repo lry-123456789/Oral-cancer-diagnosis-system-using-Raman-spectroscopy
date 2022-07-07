@@ -77,6 +77,7 @@ void window_input_information::on_textEdit_4_textChanged()
 void window_input_information::on_pushButton_clicked()
 {
     //在此处连接数据库
+    /*
     struct PATIENT_INFO
     {
         QString name=patient_name;               //患者姓名
@@ -86,6 +87,7 @@ void window_input_information::on_pushButton_clicked()
         QString part=patient_part;               //患病部位
         QString bad=patient_bad;                 //不良嗜好
     };//patient_info;
+    */
     PATIENT_INFO patient_info;
     patient_info.age=patient_age;
     patient_info.name=patient_name;
@@ -112,7 +114,8 @@ void window_input_information::on_pushButton_clicked()
     }
     //输入病人信息
     query.singleInsertData(patient_info);
-
+    //关闭数据库
+    query.closeDb();
     //弹窗提示
     QMessageBox::information(this,
                              tr("提示"),
