@@ -7,10 +7,11 @@
 #include <QtSql/QSqlDatabase>
 #include <QtSql/QSqlQuery>
 #include <QtSql/QSqlRecord>
+#include <QtSql/QSqlDriver>
 
 #include <QMessageBox>
 
-#include <String>
+#include <string>
 
 /**********************************\
  * 该部分为用户的注册操作所使用的链接数据库，操作数据库指令
@@ -24,16 +25,46 @@ SqliteOperator_user_account::SqliteOperator_user_account()
     {
         //数据库不存在
         //创建数据库
-        QSqlDatabase database =QSqlDatabase::addDatabase("ACCOUNT_AND_PASSWORD");
-        database.setDatabaseName(QApplication::applicationDirPath()+"account.db");
+        //QSqlDatabase
+        database =QSqlDatabase::addDatabase("QSQLITE");
+        database.setDatabaseName("account.db");
+        QSqlQuery query=QSqlQuery(database);
+        query.prepare("insert into ACCOUNT_AND_PASSWORD (ACCOUNT, PASSWORD) values (?,?);");
+        query.addBindValue("1111");
+        query.addBindValue("1111");
+        //query.exec();
+        if(!query.exec())
+        {
+            qDebug()<<"FAILED TO INSERT DATA"<<Qt::endl;
+        }
+        else
+        {
+            qDebug()<<"insert successfully"<<Qt::endl;
+        }
+        //database.close();
     }
     else
     {
         fclose(f1);
         //数据库存在
         //跳过创建数据库的步骤
-        QSqlDatabase database =QSqlDatabase::addDatabase("ACCOUNT_AND_PASSWORD");
-        database.setDatabaseName(QApplication::applicationDirPath()+"account.db");
+        //QSqlDatabase
+        database =QSqlDatabase::addDatabase("QSQLITE");
+        database.setDatabaseName("account.db");
+        qDebug()<<"the table is existed"<<Qt::endl;
+        QSqlQuery query=QSqlQuery(database);
+        query.prepare("insert into ACCOUNT_AND_PASSWORD (ACCOUNT, PASSWORD) values (?,?);");
+        query.addBindValue("1111");
+        query.addBindValue("1111");
+        //query.exec();
+        if(!query.exec())
+        {
+            qDebug()<<"FAILED TO INSERT DATA"<<Qt::endl;
+        }
+        else
+        {
+            qDebug()<<"insert successfully"<<Qt::endl;
+        }
     }
 }
 
@@ -54,10 +85,10 @@ void SqliteOperator_user_account::createTable()
 {
     //创建数据表
     //在下方创建需要执行的SQL语句的对象
-    QSqlQuery sqlQuery;
-    QString createSql=QString("CREATE TABLE ACCOUNT_AND_PASSWORD(\
-                                ACCOUNT TEXT PRIMARY KEY NOT NULL,\
-                                PASSWORD TEXT NOT NULL)");
+    QSqlQuery sqlQuery=QSqlQuery(database);
+    //QSqlQuery sqlQuery=QSqlQuery::QSqlQuery(database);
+    database.open();
+    QString createSql=QString("CREATE TABLE ACCOUNT_AND_PASSWORD(ACCOUNT TEXT PRIMARY KEY NOT NULL, PASSWORD TEXT NOT NULL)");
     //准备执行SQL语句
     sqlQuery.prepare(createSql);
     //执行SQL语句
@@ -69,11 +100,25 @@ void SqliteOperator_user_account::createTable()
     {
         qDebug()<<"Table created successfully";
     }
+    /*
+    sqlQuery.prepare("insert into ACCOUNT_AND_PASSWORD (ACCOUNT, PASSWORD) values (?,?);");
+    sqlQuery.addBindValue("1111");
+    sqlQuery.addBindValue("1111");
+    //query.exec();
+    if(!sqlQuery.exec())
+    {
+        qDebug()<<"FAILED TO INSERT DATA"<<Qt::endl;
+    }
+    else
+    {
+        qDebug()<<"insert successfully"<<Qt::endl;
+    }
+    */
 }
 
 bool SqliteOperator_user_account::isTableExisted_login(QString& ACCOUNT,QString& PASSWORD)
 {
-    QSqlQuery query;
+    QSqlQuery query=QSqlQuery(database);
     query.exec(QString("SELECT * from ACCOUNT_AND_PASSWORD WHERE ACCOUNT = '%1' AND PASSWORD = '%2'").arg(ACCOUNT).arg(PASSWORD));
     if(!query.next())
     {
@@ -89,7 +134,7 @@ bool SqliteOperator_user_account::isTableExisted_login(QString& ACCOUNT,QString&
 
 bool SqliteOperator_user_account::isTableExisted_register(QString& account)
 {
-    QSqlQuery query;
+    QSqlQuery query=QSqlQuery(database);
     query.exec(QString("SELECT * from ACCOUNT_AND_PASSWORD WHERE ACCOUNT = '%1'").arg(account));
     if(!query.next())
     {
@@ -105,10 +150,18 @@ bool SqliteOperator_user_account::isTableExisted_register(QString& account)
 
 void SqliteOperator_user_account::insertData(USER_ACCOUNT data)
 {
-    QSqlQuery query;
-    query.prepare("INSERT INTO ACCOUNT_AND_PASSWORD VALUES(:ACCOUNT,:PASSWORD)");
-    query.bindValue(":ACCOUNT",data.ACCOUNT);
-    query.bindValue(":PASSWIRD",data.PASSWORD);
+    QSqlQuery query=QSqlQuery(database);
+    /*
+    query.prepare("INSERT INTO ACCOUNT_AND_PASSWORD (ACCOUNT, PASSWORD)"
+                  "VALUES (:ACCOUNT,:PASSWORD)");
+                  */
+    query.prepare("insert into ACCOUNT_AND_PASSWORD(ACCOUNT, PASSWORD) values (?,? )");
+    //query.bindValue(":ACCOUNT","111111111111");
+    //query.bindValue(":PASSWORD","1111111111111");
+    //qDebug()<<"ACCOUNT\t:"<<data.ACCOUNT;
+   // qDebug()<<"PASSWORD\t:"<<data.PASSWORD;
+    query.addBindValue("1111");
+    query.addBindValue("111");
     if(!query.exec())
     {
         qDebug()<<"FAILED TO INSERT DATA"<<Qt::endl;
@@ -121,7 +174,7 @@ void SqliteOperator_user_account::insertData(USER_ACCOUNT data)
 
 void SqliteOperator_user_account::modifyData(QString ACCOUNT,QString PASSWORD)
 {
-    QSqlQuery query;
+    QSqlQuery query=QSqlQuery(database);
     query.prepare("UPDATE ACCOUNT_AND_PASSWORD SET ACCOUNT=?,PASSWORD=?");
     query.addBindValue(ACCOUNT);
     query.addBindValue(PASSWORD);
@@ -137,7 +190,7 @@ void SqliteOperator_user_account::modifyData(QString ACCOUNT,QString PASSWORD)
 
 void SqliteOperator_user_account::deleteTable(QString tableName)
 {
-    QSqlQuery query;
+    QSqlQuery query=QSqlQuery(database);
     query.exec(QString("DROP TABLE %1").arg(tableName));
     if(query.exec())
     {

@@ -10,6 +10,8 @@
 #include <QSqlError>
 #include <QSqlQuery>
 
+#include <SqliteOperator.h>
+
 
 window_register::window_register(QWidget *parent) :
     QMainWindow(parent),
@@ -55,6 +57,7 @@ void window_register::on_pushButton_clicked()
                                  tr("用户名不能与密码相同"),
                                  QMessageBox::Ok);
     }
+    /*
     else if(NEW_PASSWORD.length()<8)
     {
         QMessageBox::information(this,
@@ -76,24 +79,43 @@ void window_register::on_pushButton_clicked()
                                  tr("两次密码不一致，请重新输入"),
                                  QMessageBox::Ok);
     }
+    */
     else
     {
         //在此处连接数据库，检测用户名是否被使用过
+        SqliteOperator_user_account query;
+        query.openDb();
+        query.createTable();
+        //query=QSqlQuery::QSqlQuery(database);
+        if(query.isTableExisted_register(NEW_ACCOUNT)==true)
+        {
+            QMessageBox::critical(this,
+                                  tr("错误"),
+                                  tr("用户名已经被使用"),
+                                  QMessageBox::Ok);
+            query.closeDb();
+        }
+        else
+        {
 
-        //在此处连接数据库，将账号和密码保存(未被使用)
-
-        //提示注册成功
-        QMessageBox::information(this,
-                                 tr("提示"),
-                                 tr("创建用户成功，请登陆"),
-                                 QMessageBox::Ok);
-
-        //此处返回登录界面
-        window_login *log_i;
-        log_i =new window_login();
-        log_i->setWindowTitle("登录到应用拉曼光谱的口腔癌诊断系统");
-        log_i->show();
-        this->hide();
+            //在此处连接数据库，将账号和密码保存(未被使用)
+            USER_ACCOUNT data;
+            data.ACCOUNT=NEW_ACCOUNT;
+            data.PASSWORD=NEW_PASSWORD;
+            query.insertData(data);
+            //提示注册成功
+            QMessageBox::information(this,
+                                     tr("提示"),
+                                     tr("创建用户成功，请登陆"),
+                                     QMessageBox::Ok);
+            query.closeDb();
+            //此处返回登录界面
+            window_login *log_i;
+            log_i =new window_login();
+            log_i->setWindowTitle("登录到应用拉曼光谱的口腔癌诊断系统");
+            log_i->show();
+            this->hide();
+        }
     }
 }
 
