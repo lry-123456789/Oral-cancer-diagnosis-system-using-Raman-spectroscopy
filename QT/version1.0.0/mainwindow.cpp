@@ -57,6 +57,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_graphicsView_rubberBandChanged(const QRect &viewportRect, const QPointF &fromScenePoint, const QPointF &toScenePoint)
 {
     //拉曼光谱显示区域
+
 }
 
 
@@ -374,6 +375,13 @@ void MainWindow::on_action_show_status_program_triggered()
 void MainWindow::on_action_clear_window_triggered()
 {
     //菜单->程序屏幕状态清除
+    if(__init__()==false)
+    {
+        QMessageBox::critical(this,
+                              tr("提示"),
+                              tr("系统错误，程序无法完成初始化操作，请检查内存是否出现故障"),
+                              QMessageBox::Ok);
+    }
     ui->textBrowser->setText("程序已经完成当前状态清除");
     //清除图像显示区域
     ui->graphicsView->clearFocus();
@@ -455,6 +463,7 @@ void MainWindow::on_action_visit_website_triggered()
 void MainWindow::on_textBrowser_historyChanged()
 {
     //主界面->程序信息输出
+
 }
 
 

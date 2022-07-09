@@ -25,12 +25,12 @@ window_input_information::~window_input_information()
     delete ui;
 }
 
-QString patient_name="";
-QString patient_gender="";
-QString patient_age="";
-QString patient_time="";
-QString patient_part="";
-QString patient_bad="";
+QString patient_name="UNKNOWN";
+QString patient_gender="UNKNOWN";
+QString patient_age="UNKNOWN";
+QString patient_time="UNKNOWN";
+QString patient_part="UNKNOWN";
+QString patient_bad="UNKNOWN";
 
 void window_input_information::on_textEdit_textChanged()
 {
@@ -63,14 +63,14 @@ void window_input_information::on_textEdit_6_textChanged()
 void window_input_information::on_textEdit_3_textChanged()
 {
     //输入病人患病部位
-    patient_time=ui->textEdit_5->toPlainText();
+    patient_part=ui->textEdit_5->toPlainText();
 }
 
 
 void window_input_information::on_textEdit_4_textChanged()
 {
     //输入病人的不良嗜好
-    patient_time=ui->textEdit_6->toPlainText();
+    patient_bad=ui->textEdit_6->toPlainText();
 }
 
 
@@ -88,6 +88,12 @@ void window_input_information::on_pushButton_clicked()
         QString bad=patient_bad;                 //不良嗜好
     };//patient_info;
     */
+    patient_bad=ui->textEdit_6->toPlainText();
+    patient_part=ui->textEdit_5->toPlainText();
+    patient_time=ui->textEdit_4->toPlainText();
+    patient_age=ui->textEdit_3->toPlainText();
+    patient_gender=ui->textEdit_2->toPlainText();
+    patient_name=ui->textEdit->toPlainText();
     PATIENT_INFO patient_info;
     patient_info.age=patient_age;
     patient_info.name=patient_name;
@@ -95,10 +101,12 @@ void window_input_information::on_pushButton_clicked()
     patient_info.gender=patient_gender;
     patient_info.part=patient_part;
     patient_info.time=patient_time;
+    qDebug()<<"name="<<patient_info.name<<"gender="<<patient_info.gender<<"age="<<patient_info.age<<"time="<<patient_info.time<<"part="<<patient_info.part<<"bad="<<patient_info.bad;
     //数据结构体创建完成
     //打开数据库
     SqliteOperator_patient_info query;
     query.openDb();
+    query.createTable();
     //判断数据表是否存在
     QString str1=QString("PATIENT_INFO");
     if(query.isTableExisted_patient(str1))

@@ -54,9 +54,9 @@ SqliteOperator_user_account::SqliteOperator_user_account()
         qDebug()<<"the table is existed"<<Qt::endl;
         QSqlQuery query=QSqlQuery(database);
         query.prepare("insert into ACCOUNT_AND_PASSWORD (ACCOUNT, PASSWORD) values (?,?);");
-        query.addBindValue("1111");
-        query.addBindValue("1111");
-        //query.exec();
+        query.addBindValue("11111");
+        query.addBindValue("11111");
+        query.exec();
         if(!query.exec())
         {
             qDebug()<<"FAILED TO INSERT DATA"<<Qt::endl;
@@ -159,9 +159,11 @@ void SqliteOperator_user_account::insertData(USER_ACCOUNT data)
     //query.bindValue(":ACCOUNT","111111111111");
     //query.bindValue(":PASSWORD","1111111111111");
     //qDebug()<<"ACCOUNT\t:"<<data.ACCOUNT;
-   // qDebug()<<"PASSWORD\t:"<<data.PASSWORD;
-    query.addBindValue("1111");
-    query.addBindValue("111");
+    //qDebug()<<"PASSWORD\t:"<<data.PASSWORD;
+    //query.addBindValue("1111");
+    //query.addBindValue("111");
+    query.addBindValue(data.ACCOUNT);
+    query.addBindValue(data.PASSWORD);
     if(!query.exec())
     {
         qDebug()<<"FAILED TO INSERT DATA"<<Qt::endl;
@@ -214,16 +216,121 @@ SqliteOperator_patient_info::SqliteOperator_patient_info()
     {
         //数据库不存在
         //创建数据库
-        QSqlDatabase database =QSqlDatabase::addDatabase("PATIENT_INFO");
-        database.setDatabaseName(QApplication::applicationDirPath()+"patient_info.db");
+        database =QSqlDatabase::addDatabase("QSQLITE");
+        database.setDatabaseName("patient_info.db");
+        QSqlQuery query=QSqlQuery(database);
+        /*
+        QString createSql =QString("CREATE TABLE PATIENT_INFO(\
+                                    NAME TEXT PRIMARY NOT NULL,\
+                                    GENDER TEXT NOT NULL,\
+                                    AGE TEXT NOT NULL,\
+                                    TIME TEXT NOT NULL,\
+                                    PART TEXT ,\
+                                    BAD TEXT");
+                                    */
+        //QString createSql =QString("insert into PATIENT_INFO(NAME, GENDER, AGE, TIME, PART, BAD) values(?,?,?,?,?,?)");
+        //QString createSql=QString("CREATE TABLE ACCOUNT_AND_PASSWORD(ACCOUNT TEXT PRIMARY KEY NOT NULL, PASSWORD TEXT NOT NULL)");
+        /*
+         *
+        query.prepare("insert into ACCOUNT_AND_PASSWORD (ACCOUNT, PASSWORD) values (?,?);");
+        query.addBindValue("1111");
+        query.addBindValue("1111");
+        //query.exec();
+        if(!query.exec())
+        {
+            qDebug()<<"FAILED TO INSERT DATA"<<Qt::endl;
+        }
+        else
+        {
+            qDebug()<<"insert successfully"<<Qt::endl;
+        }
+        */
+        query.prepare("insert into PATIENT_INFO(NAME, GENDER, AGE, TIME, PART, BAD) values(?,?,?,?,?,?)");
+        query.addBindValue("111");
+        query.addBindValue("111");
+        query.addBindValue("111");
+        query.addBindValue("111");
+        query.addBindValue("111");
+        query.addBindValue("111");
+        //query.prepare(createSql);
+        //执行语句
+        if(!query.exec())
+        {
+            qDebug()<<"ERROR Failed to create table"<<query.lastError();
+            //return false;
+        }
+        else
+        {
+            qDebug()<<"Table created"<<Qt::endl;
+            //return false;
+        }
     }
     else
     {
         fclose(f1);
         //数据库存在
         //跳过创建数据库的步骤
-        QSqlDatabase database =QSqlDatabase::addDatabase("PATIENT_INFO");
-        database.setDatabaseName(QApplication::applicationDirPath()+"patient_info.db");
+        qDebug()<<"table existed"<<Qt::endl;
+        database =QSqlDatabase::addDatabase("QSQLITE");
+        database.setDatabaseName("patient_info.db");
+        QSqlQuery query=QSqlQuery(database);
+        /*
+        QString createSql =QString("CREATE TABLE PATIENT_INFO(\
+                                    NAME TEXT PRIMARY NOT NULL,\
+                                    GENDER TEXT NOT NULL,\
+                                    AGE TEXT NOT NULL,\
+                                    TIME TEXT NOT NULL,\
+                                    PART TEXT ,\
+                                    BAD TEXT");
+                                    */
+        //QString createSql =QString("CREATE TABLE PATIENT_INFO(NAME TEXT PRIMARY NOT NULL, GENDER TEXT NOT NULL, AGE TEXT NOT NULL, TIME TEXT NOT NULL, PART TEXT , BAD TEXT)");
+        //QSqlQuery query=QSqlQuery(database);
+        /*
+        QString createSql =QString("CREATE TABLE PATIENT_INFO(\
+                                    NAME TEXT PRIMARY NOT NULL,\
+                                    GENDER TEXT NOT NULL,\
+                                    AGE TEXT NOT NULL,\
+                                    TIME TEXT NOT NULL,\
+                                    PART TEXT ,\
+                                    BAD TEXT");
+                                    */
+        //QString createSql =QString("CREATE TABLE PATIENT_INFO(NAME TEXT PRIMARY NOT NULL, GENDER TEXT NOT NULL, AGE TEXT NOT NULL, TIME TEXT NOT NULL, PART TEXT, BAD TEXT)");
+        QString createSql =QString("insert into PATIENT_INFO(NAME, GENDER, AGE, TIME, PART, BAD) values(?,?,?,?,?,?)");
+        //QString createSql=QString("CREATE TABLE ACCOUNT_AND_PASSWORD(ACCOUNT TEXT PRIMARY KEY NOT NULL, PASSWORD TEXT NOT NULL)");
+        /*
+         *
+        query.prepare("insert into ACCOUNT_AND_PASSWORD (ACCOUNT, PASSWORD) values (?,?);");
+        query.addBindValue("1111");
+        query.addBindValue("1111");
+        //query.exec();
+        if(!query.exec())
+        {
+            qDebug()<<"FAILED TO INSERT DATA"<<Qt::endl;
+        }
+        else
+        {
+            qDebug()<<"insert successfully"<<Qt::endl;
+        }
+        */
+        query.prepare("insert into PATIENT_INFO(NAME, GENDER, AGE, TIME, PART, BAD) values(?,?,?,?,?,?)");
+        query.addBindValue("111");
+        query.addBindValue("111");
+        query.addBindValue("111");
+        query.addBindValue("111");
+        query.addBindValue("111");
+        query.addBindValue("111");
+        //query.prepare(createSql);
+        //执行语句
+        if(!query.exec())
+        {
+            qDebug()<<"ERROR Failed to create table"<<query.lastError();
+            //return false;
+        }
+        else
+        {
+            qDebug()<<"Table created"<<Qt::endl;
+            //return false;
+        }
     }
 }
 
@@ -243,14 +350,10 @@ bool SqliteOperator_patient_info::openDb(void)
 
 bool SqliteOperator_patient_info::createTable(void)
 {
-    QSqlQuery query;
-    QString createSql =QString("CREATE TABLE PATIENT_INFO(\
-                                NAME TEXT PRIMARY NOT NULL,\
-                                GENDER TEXT NOT NULL,\
-                                AGE TEXT NOT NULL,\
-                                TIME TEXT NOT NULL,\
-                                PART TEXT ,\
-                                BAD TEXT");
+    QSqlQuery query=QSqlQuery(database);
+    database.open();
+    QString createSql =QString("CREATE TABLE PATIENT_INFO(NAME TEXT PRIMARY KEY NOT NULL, GENDER TEXT NOT NULL, AGE TEXT NOT NULL, TIME TEXT NOT NULL, PART TEXT, BAD TEXT)");
+
     query.prepare(createSql);
     //执行语句
     if(!query.exec())
@@ -267,7 +370,7 @@ bool SqliteOperator_patient_info::createTable(void)
 
 bool SqliteOperator_patient_info::isTableExisted_patient(QString& tableName)
 {
-    QSqlDatabase database = QSqlDatabase::database();
+    database = QSqlDatabase::database();
     if(database.tables().contains(tableName))
     {
         return true;
@@ -277,14 +380,29 @@ bool SqliteOperator_patient_info::isTableExisted_patient(QString& tableName)
 
 void SqliteOperator_patient_info::singleInsertData(PATIENT_INFO patient)
 {
-    QSqlQuery query;
-    query.prepare("INSERT INTO PATIENT_INFO VALUES(:NAME,:GENDER,:AGE,:TIME,:PART,:BAD)");
-    query.bindValue(":NAME",patient.name);
-    query.bindValue(":GENDER",patient.gender);
-    query.bindValue(":AGE",patient.age);
-    query.bindValue(":TIME",patient.time);
-    query.bindValue(":PART",patient.part);
-    query.bindValue(":BAD",patient.bad);
+    QSqlQuery query=QSqlQuery(database);
+    database.open();
+    query.prepare("insert into PATIENT_INFO(NAME, GENDER, AGE, TIME, PART, BAD) values (?,?,?,?,?,?);");
+    query.addBindValue(patient.name);
+    query.addBindValue(patient.gender);
+    query.addBindValue(patient.age);
+    query.addBindValue(patient.time);
+    query.addBindValue(patient.part);
+    query.addBindValue(patient.bad);
+    //query.addBindValue("11111");
+    //query.addBindValue("11111");
+    //query.addBindValue("11111");
+    //query.addBindValue("11111");
+    //query.addBindValue("11111");
+    //query.addBindValue("11111");
+    //query.prepare("insert into ACCOUNT_AND_PASSWORD(ACCOUNT, PASSWORD) values (?,? )");
+    //query.bindValue(":ACCOUNT","111111111111");
+    //query.bindValue(":PASSWORD","1111111111111");
+    //qDebug()<<"ACCOUNT\t:"<<data.ACCOUNT;
+    //qDebug()<<"PASSWORD\t:"<<data.PASSWORD;
+    //query.addBindValue("1111");
+    //query.addBindValue("111");
+    qDebug()<<"name="<<patient.name<<"gender="<<patient.gender<<"age="<<patient.age<<"time="<<patient.time<<"part="<<patient.part<<"bad="<<patient.bad;
     if(!query.exec())
     {
         qDebug()<<"error: failed to insert data"<<query.lastError();
@@ -297,7 +415,7 @@ void SqliteOperator_patient_info::singleInsertData(PATIENT_INFO patient)
 
 void SqliteOperator_patient_info::modifyData(PATIENT_INFO patient)
 {
-    QSqlQuery query;
+    QSqlQuery query=QSqlQuery(database);
     query.prepare("UPDATE PATIENT_INFO NAME=?,GENDER=?,AGE=?,TIME=?,PART=?,BAD=?");
     query.addBindValue(patient.name);
     query.addBindValue(patient.gender);
@@ -317,7 +435,7 @@ void SqliteOperator_patient_info::modifyData(PATIENT_INFO patient)
 
 void SqliteOperator_patient_info::deleteData(int id)
 {
-    QSqlQuery query;
+    QSqlQuery query=QSqlQuery(database);
     query.exec(QString("DELTET FROM PATIENT_INFO WHERE id='%1'").arg(id));
     if(!query.exec())
     {
@@ -331,7 +449,7 @@ void SqliteOperator_patient_info::deleteData(int id)
 
 void SqliteOperator_patient_info::deleteTable(QString tableName)
 {
-    QSqlQuery query;
+    QSqlQuery query=QSqlQuery(database);
     query.exec(QString("DROP TABLE %1").arg(tableName));
     if(!query.exec())
     {
@@ -355,7 +473,7 @@ SqliteOperator_Spectrum_info::SqliteOperator_Spectrum_info()
     {
         //数据库不存在
         //创建数据库
-        QSqlDatabase database =QSqlDatabase::addDatabase("SPECTRUM");
+        database =QSqlDatabase::addDatabase("QSQLITE");
         database.setDatabaseName(QApplication::applicationDirPath()+"spectrum.db");
     }
     else
@@ -363,7 +481,7 @@ SqliteOperator_Spectrum_info::SqliteOperator_Spectrum_info()
         fclose(f1);
         //数据库存在
         //跳过创建数据库的步骤
-        QSqlDatabase database =QSqlDatabase::addDatabase("SPECTRUM");
+        database =QSqlDatabase::addDatabase("QSQLITE");
         database.setDatabaseName(QApplication::applicationDirPath()+"spectrum.db");
     }
 }
@@ -384,10 +502,8 @@ bool SqliteOperator_Spectrum_info::openDb(void)
 
 bool SqliteOperator_Spectrum_info::createTable(void)
 {
-    QSqlQuery query;
-    QString createSql =QString("CREATE TABLE SPECTRUM(\
-                                NAME TEXT PRIMARY KRY NOT NULL\
-                                DATA TEXT NOT NULL");
+    QSqlQuery query=QSqlQuery(database);
+    QString createSql =QString("CREATE TABLE SPECTRUM(NAME TEXT PRIMARY KRY NOT NULL, DATA TEXT NOT NULL");
     query.prepare(createSql);
     //开始执行SQL语句
     if(!query.exec())
@@ -402,7 +518,7 @@ bool SqliteOperator_Spectrum_info::createTable(void)
 
 bool SqliteOperator_Spectrum_info::isTableExist(QString tableName)
 {
-    QSqlDatabase database=QSqlDatabase::database();
+    database=QSqlDatabase::database();
     if(database.tables().contains(tableName))
     {
         return true;
@@ -421,7 +537,7 @@ void SqliteOperator_Spectrum_info::singleInsertData(SPECTRUM_INFO data)
     std::string data_1=data_0.toStdString();
     QString data_2=QString::fromStdString(data_1);
     //下面进行数据库的操作
-    QSqlQuery query;
+    QSqlQuery query=QSqlQuery(database);
     query.prepare("INSERT INTO SPECTRUM VALUES(:NAME,:DATA)");
     query.bindValue(":NAME",data.name);
     query.bindValue(":GENDER",data_2);
@@ -445,7 +561,7 @@ void SqliteOperator_Spectrum_info::modifyData(SPECTRUM_INFO data)
     }
     std::string data_1=data_0.toStdString();
     QString data_2=QString::fromStdString(data_1);
-    QSqlQuery query;
+    QSqlQuery query=QSqlQuery(database);
     query .prepare("UPDATE SPECTRUM SET NAME=?,DATA=?");
     query.addBindValue(data.name);
     query.addBindValue(data_2);
@@ -461,7 +577,7 @@ void SqliteOperator_Spectrum_info::modifyData(SPECTRUM_INFO data)
 
 void SqliteOperator_Spectrum_info::deleteData(int id)
 {
-    QSqlQuery query;
+    QSqlQuery query=QSqlQuery(database);
     query.exec(QString("DELETE FROM SPECTRUM WHERE id=%1").arg(id));
     if(!query.exec())
     {
@@ -475,7 +591,7 @@ void SqliteOperator_Spectrum_info::deleteData(int id)
 
 void SqliteOperator_Spectrum_info::deleteTable(QString tableName)
 {
-    QSqlQuery query;
+    QSqlQuery query=QSqlQuery(database);
     query.exec(QString("DROP TABLE %1").arg(tableName));
     if(query.exec())
     {

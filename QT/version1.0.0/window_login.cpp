@@ -70,9 +70,11 @@ void window_login::on_pushButton_clicked()
                                      tr("错误"),
                                      tr("用户名或密码不存在，请重新输入"),
                                      QMessageBox::Ok);
+            //query.closeDb();
         }
         else
         {
+            //query.closeDb();
             //登录成功后关闭本界面
             MainWindow *w;
             w = new MainWindow();
@@ -89,6 +91,7 @@ void window_login::on_pushButton_clicked()
             this->hide();
             //成功登录到本系统
         }
+        query.closeDb();
         /******************\
         //登录成功后关闭本界面
         MainWindow *w;
