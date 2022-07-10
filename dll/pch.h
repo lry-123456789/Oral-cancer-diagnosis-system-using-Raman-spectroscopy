@@ -23,4 +23,5 @@ extern "C" EXPORT_DLL double* inception_model(std::string filepath);
 extern "C" EXPORT_DLL double* mobilenet_model(std::string filepath);
 extern "C" EXPORT_DLL double* transformer_model(std::string filepath);
 extern "C" EXPORT_DLL double* vgg_model(std::string filepath);
+extern "C" EXPORT_DLL bool draw_picture(std::string input_filepath, std::string output_filepath);
 #endif //PCH_H
