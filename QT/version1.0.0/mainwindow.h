@@ -141,6 +141,10 @@ private slots:
 
     void on_radioButton_26_clicked();
 
+    void on_label_linkActivated(const QString &link);
+
+    void on_label_linkHovered(const QString &link);
+
 private:
     Ui::MainWindow *ui;
     window_input_information *input_info;

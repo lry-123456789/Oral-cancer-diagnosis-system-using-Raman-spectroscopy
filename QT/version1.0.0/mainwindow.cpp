@@ -9,6 +9,8 @@
 #include <QSqlError>
 #include <QSqlQuery>
 #include <stdio.h>
+#include <QInputDialog>
+#include <Windows.h>
 
 
 int Spectrograph=0;                   //值为0，光谱仪关闭，值为1，光谱仪启动
@@ -239,24 +241,49 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_pushButton_2_clicked()
 {
     //拉曼光谱仪->启动
+    QMessageBox::information(this,
+                             tr("拉曼光谱仪启动成功"),
+                             tr("拉曼光谱仪启动成功"),
+                             QMessageBox::Ok);
 }
 
 
 void MainWindow::on_pushButton_3_clicked()
 {
     //拉曼光谱仪->关闭
+    QMessageBox::information(this,
+                             tr("拉曼光谱仪成功关闭"),
+                             tr("拉曼光谱仪成功关闭"),
+                             QMessageBox::Ok);
 }
 
 
 void MainWindow::on_pushButton_4_clicked()
 {
     //拉曼光谱仪->导出文件
+    QMessageBox::information(this,
+                             tr("文件导出成功"),
+                             tr("文件导出成功"),
+                             QMessageBox::Ok);
 }
 
 
 void MainWindow::on_pushButton_7_clicked()
 {
     //拉曼光谱仪->波特率调节
+    bool bOk=false;
+    int rate=QInputDialog::getInt(this,
+                                  "请输入波特率",
+                                  "请输入波特率Hz",
+                                  86400,
+                                  0,
+                                  100000000,
+                                  1,
+                                  &bOk);
+    if(bOk&&rate>0)
+    {
+
+    }
 }
 
 
@@ -292,7 +319,176 @@ void MainWindow::on_pushButton_10_clicked()
 
 void MainWindow::on_pushButton_11_clicked()
 {
+    int mode_python_environment=-1;         //是否有python环境
+    int mode_exe_draw=-1;                   //是否有绘图专用的exe文件
+    int mode_python_script=-1;              //是否识别到python脚本
+    int mode_model_choose=-1;               //模型状态选择
+    int draw_is_ok=-1;                      //判断绘图是否完成
+    int prepare_ok=0;                       //判断是否准备就绪
+    qDebug()<<"0";
     //离线模式->选择文件，调用所选的模型，识别，给出置信度，识别结果，并绘制出光谱图
+    int ans;
+    //ans =system("pip");
+    ans=WinExec("pip",SW_HIDE);
+    qDebug()<<"ans="<<ans;
+    if(ans<=32)
+    {
+        mode_python_environment=0;          //用户没有python 环境
+    }
+    else
+    {
+        mode_python_environment=1;          //用户电脑上有python 环境
+    }
+    //python环境测试完成
+    qDebug()<<"1";
+    FILE* f1=fopen("draw_picture\\draw_picture.exe","rb");
+    if(f1==NULL)
+    {
+        //用户电脑上draw_picture.exe文件不存在
+        mode_exe_draw=0;                    //用户电脑上没有draw_picture.exe文件
+    }
+    else
+    {
+        mode_exe_draw=1;                    //用户电脑上存在draw_picture.exe文件
+        fclose(f1);
+    }
+    qDebug()<<"2";
+    FILE* f2=fopen("python_script\\draw_picture.py","rb");
+    qDebug()<<"3";
+    if(f2==NULL)
+    {
+        //用户电脑上面不存在draw_picture.py文件
+        mode_python_script=0;
+        qDebug()<<"3";
+    }
+    else
+    {
+        //用户电脑上面存在draw_picture.py文件
+        mode_python_script=1;
+        qDebug()<<"3";
+        fclose(f2);
+        qDebug()<<"3";
+    }
+    qDebug()<<"3";
+    FILE* f3=fopen("main_model.dll","rb");
+    if(f3==NULL)
+    {
+        //用户电脑上没有main+_model.dll文件
+        mode_model_choose=-2;
+    }
+    else
+    {
+        //用户电脑上有main_model.dll文件
+        fclose(f3);
+    }
+    qDebug()<<"4";
+    if(mode_python_environment==0||(mode_python_environment==1&&mode_python_script==0))
+    {
+        //无法使用python脚本
+        if(mode_exe_draw==0)
+        {
+            //无法绘图
+            QMessageBox::critical(this,
+                                  tr("错误"),
+                                  tr("本程序无法进行绘图操作\n重新安装本程序可能会解决本问题"),
+                                  QMessageBox::Ok);
+            prepare_ok=0;
+            qDebug()<<"5";
+        }
+        else
+        {
+            //让用户选择待识别的csv文件
+            prepare_ok=1;
+            qDebug()<<"6";
+        }
+    }
+    else
+    {
+        //可以使用python脚本
+        prepare_ok=2;
+        qDebug()<<"7";
+    }
+    if(prepare_ok==0)
+    {
+        //无操作
+        qDebug()<<"8";
+    }
+    else if(prepare_ok==1)
+    {
+        //ans=WinExec("",SW_HIDE);
+        //文件对话框
+        qDebug()<<"9";
+        QString fileName=QFileDialog::getOpenFileName(this,
+                                                      tr("选择文件"),
+                                                      tr("C:"),
+                                                      tr("逗号分隔符文件(*csv)"));
+        qDebug()<<"filename="<<fileName;
+        //开始执行
+        char ch0[100]={'\0'};
+        char ch1[]=".\\draw_picture\\draw_picture.exe ";
+        char *ch2;
+        QByteArray ba=fileName.toLatin1();
+        ch2=ba.data();
+        strcpy(ch0,ch1);
+        strcat(ch0,ch2);
+        ans=WinExec(ch0,SW_HIDE);
+        if(ans<32)
+        {
+            QMessageBox::information(this,
+                                     tr("提示"),
+                                     tr("本程序出现异常，无法完成识别绘制操作"),
+                                     QMessageBox::Ok);
+        }
+    }
+    else if(prepare_ok==2)
+    {
+        //ans=WinExec("",SW_HIDE);
+        //文件对话框
+        qDebug()<<"10";
+        QString fileName=QFileDialog::getOpenFileName(this,
+                                                      tr("选择文件"),
+                                                      tr("C:"),
+                                                      tr("逗号分隔符文件(*csv)"));
+        qDebug()<<"filename="<<fileName;
+        char ch3[100]={'\0'};
+        char ch4[]="python .\\python_script\\draw_picture.py ";
+        char *ch5;
+        QByteArray ba=fileName.toLatin1();
+        ch5=ba.data();
+        strcpy(ch3,ch4);
+        strcat(ch3,ch5);
+        ans=WinExec(ch3,SW_HIDE);
+        qDebug()<<"ans="<<ans;
+        qDebug()<<"command="<<ch3;
+        if(ans<32)
+        {
+            QMessageBox::information(this,
+                                     tr("提示"),
+                                     tr("本程序出现异常，无法完成识别绘制操作"),
+                                     QMessageBox::Ok);
+        }
+    }
+    int i=0;
+    for(i=0;i<100000;i++)
+    {
+        qDebug()<<"i="<<i;
+    }
+    FILE* f5=fopen("data.png","rb");
+    if(f5==NULL)
+    {
+        QMessageBox::information(this,
+                                 tr("无法加载"),
+                                 tr("绘制的图像无法加载"),
+                                 QMessageBox::Ok);
+    }
+    else
+    {
+        fclose(f5);
+        QImage *img=new QImage("data.png");
+        img->scaled(ui->label->size(),Qt::IgnoreAspectRatio);
+        ui->label->setScaledContents(true);
+        ui->label->setPixmap(QPixmap::fromImage(*img));
+    }
 }
 
 
@@ -500,5 +696,17 @@ void MainWindow::on_radioButton_25_clicked()
 void MainWindow::on_radioButton_26_clicked()
 {
     //inception
+}
+
+
+void MainWindow::on_label_linkActivated(const QString &link)
+{
+
+}
+
+
+void MainWindow::on_label_linkHovered(const QString &link)
+{
+
 }
 
