@@ -1,0 +1,17 @@
+﻿  源.cpp
+D:\Users\HUAWEI\source\repos\uninstall\源.cpp(18,31): warning C4267: “初始化”: 从“size_t”转换到“unsigned int”，可能丢失数据
+D:\Users\HUAWEI\source\repos\uninstall\源.cpp(186,11): warning C4477: “printf”: 格式字符串“%s”需要类型“char *”的参数，但可变参数 1 拥有了类型“const _Elem *”
+          with
+          [
+              _Elem=wchar_t
+          ]
+D:\Users\HUAWEI\source\repos\uninstall\源.cpp(186,11): message : 请考虑在格式字符串中使用“%ls”
+D:\Users\HUAWEI\source\repos\uninstall\源.cpp(186,11): message : 请考虑在格式字符串中使用“%lls”
+D:\Users\HUAWEI\source\repos\uninstall\源.cpp(186,11): message : 请考虑在格式字符串中使用“%Ls”
+D:\Users\HUAWEI\source\repos\uninstall\源.cpp(186,11): message : 请考虑在格式字符串中使用“%ws”
+  正在生成代码
+  2 of 236 functions ( 0.8%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+  uninstall.vcxproj -> D:\Users\HUAWEI\source\repos\uninstall\x64\Release\uninstall.exe
