@@ -31,7 +31,7 @@ FORMS += \
     window_register.ui
 
 TRANSLATIONS += \
-    main_1_0_0_zh_CN.ts
+    main_2_0_0_zh_CN.ts
 CONFIG += lrelease
 CONFIG += embed_translations
 
