@@ -2,6 +2,7 @@ import tkinter as tk
 import tkinter.ttk
 from tkinter import *
 from tkinter import messagebox
+from tkinter.messagebox import *
 
 global start ,window_width,window_height
 start =0
@@ -390,7 +391,169 @@ class MainWindow(Frame):
         :return:
         """
 
+class login(Frame):
+    def __init__(self,master=None):
+        # 由于Frame为父类，因此需要调用父类的构造器
+        super().__init__(master)
+        print('__init__mode :width=%d,height=%d' % (window_width, window_height))
+        self.window = tk.Tk()  # 窗口
+        self.window.title('登录到应用拉曼光谱的口腔癌诊断系统(build22714version3.0.0)')  # 窗口标题
+        self.window_width = 600
+        self.window_height = 150
+        self.window.geometry(str(self.window_width) + 'x' + str(self.window_height))  # 加载时初始值
+        self.window.bind('<Configure>', self.window_resize)
+        self.create_widgets()  # 创建组件，在本方法中自定义组件
+        self.master = master  # Frame构造器
+        self.pack()  # 组件定位
+        self.window.update()
+        self.update()
+
+
+    def window_resize(self,event=None):
+        print('width=%d,height=%d'%(self.window.winfo_width(),self.window.winfo_height()))
+        if event is not None:
+            if self.window_width != self.window.winfo_width() or self.window_height != self.window.winfo_height():
+                if self.window_width != self.window.winfo_width():
+                    self.window_width = self.window.winfo_width()
+                if self.window_height != self.window.winfo_height():
+                    self.window_height = self.window.winfo_height()
+                # 此处等率界面应当设定为不可调节窗口大小
+                # 因此在此处进行长度，宽度的强制更改<强制更改可以使用withdraw,deiconify方法>
+                print('new_width=%d,new_height=%d'%(self.window_width,self.window_height))
+                print('width_outer=%d,height_outer=%d'%(window_width,window_height))
+                self.window.update()
+                self.reset()
+                # self.create_widgets()
+                # self.window.withdraw()
+                # self.window.deiconify()
+                self.create_widgets()
+                # self.window.update()
+
+    def reset(self):
+        # 销毁当前页面所有部件
+        try:
+            self.window.grid_forget()
+        except :
+            print('reset failed')
+
+    def create_widgets(self):
+        """
+        函数功能：绘制登录界面函数
+        :return: 本函数没有返回值
+        """
+        label0=tk.Label(self.window,text='用户名').place(x=50,y=30)
+        label1=tk.Label(self.window,text='密码').place(x=50,y=70)
+        self.text0=tk.Text(self.window,width=60,height=1)
+        self.text0.place(x=100,y=30)
+        self.text1=tk.Text(self.window,width=60,height=1)
+        self.text1.place(x=100,y=70)
+        button0=tk.Button(self.window,text='登录',width=20,height=1,command=self.login_sys).place(x=50,y=100)
+        button1=tk.Button(self.window,text='注册',width=20,height=1,command=self.register_sys).place(x=350,y=100)
+
+    def login_sys(self):
+        """
+        函数功能：获取两个text文本框的内容，并与SQL数据库比对，如果比对成功，则进入主函数界面，如果比对失败，则没有任何操作
+        :return:
+        """
+        user_account=self.text0.get(1.0,tk.END+"-1c")
+        print(user_account)
+        user_password=self.text1.get(1.0,tk.END+"-1c")
+        print(user_password)
+        if user_password == "" or user_account == "":
+            messagebox.showinfo(title='错误',message='用户名或密码为空')
+        else :
+            # 此处链接数据库，进行登录用户名，密码匹配，如果成功，则进入主界面，如果失败，则弹窗报错
+            """
+            如果用户名密码无法匹配，则提示用户名或密码错误，如果匹配成功，则进入主程序界面
+            """
+            self.window.destroy()
+            MainWindow(self.master)
+
+
+    def register_sys(self):
+        """
+        函数功能：进入注册界面，跳转到注册界面，执行完注册后，返回登录界面
+        :return:
+        """
+        self.window.destroy()
+        register(self.master)
+
+
+class register(Frame):
+    def __init__(self,master=None):
+        # 由于Frame为父类，因此需要调用父类的构造器
+        super().__init__(master)
+        print('__init__mode :width=%d,height=%d' % (window_width, window_height))
+        self.window = tk.Tk()  # 窗口
+        self.window.title('登录到应用拉曼光谱的口腔癌诊断系统(build22714version3.0.0)')  # 窗口标题
+        self.window_width = 600
+        self.window_height = 200
+        self.window.geometry(str(self.window_width) + 'x' + str(self.window_height))  # 加载时初始值
+        self.window.bind('<Configure>', self.window_resize)
+        self.create_widgets()  # 创建组件，在本方法中自定义组件
+        self.master = master  # Frame构造器
+        self.pack()  # 组件定位
+        self.window.update()
+        self.update()
+
+    def window_resize(self,event=None):
+        print('width=%d,height=%d'%(self.window.winfo_width(),self.window.winfo_height()))
+        if event is not None:
+            if self.window_width != self.window.winfo_width() or self.window_height != self.window.winfo_height():
+                if self.window_width != self.window.winfo_width():
+                    self.window_width = self.window.winfo_width()
+                if self.window_height != self.window.winfo_height():
+                    self.window_height = self.window.winfo_height()
+                # 此处等率界面应当设定为不可调节窗口大小
+                # 因此在此处进行长度，宽度的强制更改<强制更改可以使用withdraw,deiconify方法>
+                print('new_width=%d,new_height=%d'%(self.window_width,self.window_height))
+                print('width_outer=%d,height_outer=%d'%(window_width,window_height))
+                self.window.update()
+                self.reset()
+                # self.create_widgets()
+                # self.window.withdraw()
+                # self.window.deiconify()
+                self.create_widgets()
+                # self.window.update()
+
+    def reset(self):
+        # 销毁当前页面所有部件
+        try:
+            self.window.grid_forget()
+        except :
+            print('reset failed')
+
+    def create_widgets(self):
+        """
+        函数功能：绘制登录界面函数
+        :return: 本函数没有返回值
+        """
+        label0=tk.Label(self.window,text='用户名').place(x=50,y=30)
+        label1=tk.Label(self.window,text='密码').place(x=50,y=70)
+        label2=tk.Label(self.window,text='确认密码').place(x=50,y=110)
+        self.text0=tk.Text(self.window,width=60,height=1)
+        self.text0.place(x=150,y=30)
+        self.text1=tk.Text(self.window,width=60,height=1)
+        self.text1.place(x=150,y=70)
+        self.text2=tk.Text(self.window,width=60,height=1)
+        self.text2.place(x=150,y=110)
+        button0=tk.Button(self.window,text='注册',width=70,height=1,command=self.login_sys).place(x=50,y=155)
+        # button1=tk.Button(self.window,text='注册',width=20,height=1,command=self.register_sys).place(x=350,y=100)
+
+    def login_sys(self):
+        """
+        函数功能：切换到登录界面
+        :return:
+        """
+        # 此处链接数据库，并将数据保存
+
+        # 返回登录界面
+        self.window.destroy()
+        login(self.master)
+
+
+
 if __name__=='__main__':
     root=tk.Tk()
-    app=MainWindow(master=root)
+    app=register(master=root)
     app.mainloop()
