@@ -3,6 +3,8 @@ import tkinter.ttk
 from tkinter import *
 from tkinter import messagebox
 from tkinter.messagebox import *
+import pymysql
+import sqlite3
 
 global start ,window_width,window_height
 start =0
@@ -189,7 +191,7 @@ class MainWindow(Frame):
         group3_group2_button1=tk.Button(group3_group2,text='一键检测（在线）',width=10*self.window_width//1200,height=1*self.window_height//600,command=self.detect_online).place(x=140*self.window_width//1200,y=-10*self.window_height//600)
         group3_group2_button2=tk.Button(group3_group2,text='下载数据（在线）',width=10*self.window_width//1200,height=1*self.window_height//600,command=self.download_data).place(x=280*self.window_width//1200,y=-10*self.window_height//600)
         group3_group2_radioButton0=tk.ttk.Radiobutton(group3_group2,text='离线模式',variable=self.value2,value=1,command=self.set_radiobutton_01).place(x=420*self.window_width//1200,y=-10*self.window_height//600)
-        group3_group2_radioButton1=tk.ttk.Radiobutton(group3_group2,text='在线模式',variable=self.value2,value=2,command=self.set_radiobutton_02).place(x=420*self.window_width//1200,y=-10*self.window_height//600)
+        group3_group2_radioButton1=tk.ttk.Radiobutton(group3_group2,text='在线模式',variable=self.value2,value=2,command=self.set_radiobutton_02).place(x=420*self.window_width//1200,y=10*self.window_height//600)
         group3_group2.place(x=0*self.window_width//1200,y=250*self.window_height//600)
         group3.place(x=600*self.window_width//1200,y=220*self.window_height//600)
 
@@ -198,6 +200,7 @@ class MainWindow(Frame):
         函数功能：导出数据
         :return: True ->导出成功 False ->导出失败
         """
+        messagebox.showinfo(title='提示',message='数据导出成功')
 
     def action_save_all_data(self):
         """
@@ -466,8 +469,28 @@ class login(Frame):
             """
             如果用户名密码无法匹配，则提示用户名或密码错误，如果匹配成功，则进入主程序界面
             """
-            self.window.destroy()
-            MainWindow(self.master)
+            # 开始执行数据库操作
+            conn = sqlite3.connect("account.db")
+            cursor = conn.cursor()
+            sql="SELECT * from ACCOUNT_AND_PASSWORD WHERE ACCOUNT = '%s' AND PASSWORD='%s'"%(user_account,user_password)
+            print(sql)
+            print(cursor.execute(sql))
+            result = cursor.fetchone()
+            conn.commit()
+            print(result)
+            print(type(result))
+            cursor.close()
+            conn.close()
+            if result == None :
+                print('error')
+                # 此处无需做任何操作
+            else:
+                print('success')
+                # 此处链接主界面mainwindow
+                self.window.destroy()
+                MainWindow(self.master)
+            # self.window.destroy()
+            # MainWindow(self.master)
 
 
     def register_sys(self):
@@ -546,7 +569,47 @@ class register(Frame):
         :return:
         """
         # 此处链接数据库，并将数据保存
-
+        account=self.text0.get(1.0,tk.END+"-1c")
+        password0=self.text1.get(1.0,tk.END+"-1c")
+        password1=self.text2.get(1.0,tk.END+"-1c")
+        if password0 == password1:
+            """
+            密码第一次验证通过
+            """
+            if password0 == account :
+                """
+                用户名不能和密码相同
+                """
+                messagebox.showinfo(title='提示',message='用户名不能与密码相同')
+            else :
+                """
+                在此处链接数据库
+                """
+                conn = sqlite3.connect("account.db")
+                cursor=conn.cursor()
+                try:
+                    sql = "CREATE TABLE ACCOUNT_AND_PASSWORD(ACCOUNT TEXT PRIMARY KEY NOT NULL, PASSWORD TEXT NOT NULL)"
+                    # 创建数据表
+                    cursor.execute(sql)
+                    result = cursor.fetchall()
+                    # 往数据表中写入数据
+                except sqlite3.OperationalError as E:
+                    print(E)
+                sql = "insert into ACCOUNT_AND_PASSWORD values('%s', '%s')"%(account,password0)
+                print(sql)
+                print(cursor.execute(sql))
+                result = cursor.fetchall()
+                conn.commit()
+                # 往数据表中写入数据
+                print(result)
+                print(type(result))
+                cursor.close()
+                conn.close()
+        else:
+            """
+            两次密码不一致
+            """
+            messagebox.showerror(title='错误',message='两次密码输入不一致')
         # 返回登录界面
         self.window.destroy()
         login(self.master)
@@ -555,5 +618,5 @@ class register(Frame):
 
 if __name__=='__main__':
     root=tk.Tk()
-    app=register(master=root)
+    app=login(master=root)
     app.mainloop()
