@@ -7,6 +7,9 @@ import pymysql
 import sqlite3
 
 global start, window_width, window_height
+global patient_name,patient_gender,patient_age,patient_time,patient_bad,patient_part
+patient_time,patient_bad,patient_part,patient_name,patient_gender,patient_age ="","","","","",""
+
 start = 0
 if start == 0:
     print('use default options')
@@ -809,6 +812,42 @@ class MainWindow(Frame):
             # 往数据表中写入数据
         except sqlite3.OperationalError as E:
             print(E)
+        # 此处弹窗获取用户信息，将拉曼光谱数据导入到数据库中
+        root00=tk.Tk()
+        app=get_information(master=root00)
+        app.mainloop()
+        """
+        此处获取信息并且输入
+        """
+        error = 0
+        if patient_name == "":
+            error = error+1
+        if patient_age == "":
+            error = error+1
+        if patient_time == "":
+            error = error+1
+        if patient_bad == "":
+            error = error+1
+        if patient_gender == "":
+            error = error+1
+        if patient_part == "":
+            error = error+1
+        """
+        检测是否出现error状况，如果是，则返回错误输入，否，则导入光谱数据
+        """
+        if error != 0:
+            messagebox.showerror(title='错误',message='存在非法字符，拒绝访问')
+        else :
+            """
+            此处获取拉曼光谱数据，直接存储至数据库
+            """
+            """
+            数据储存完成，弹窗提示，存储成功
+            """
+            messagebox.showinfo(title='提示',message='拉曼光谱元数据以及病人信息储存成功')
+
+
+
 
     def action_input_file(self):
         """
@@ -1215,6 +1254,110 @@ class register(Frame):
         # 返回登录界面
         self.window.destroy()
         login(self.master)
+
+
+class get_information(Frame):
+    def __init__(self, master=None):
+        # 由于Frame为父类，因此需要调用父类的构造器
+        super().__init__(master)
+        print('__init__mode :width=%d,height=%d' % (window_width, window_height))
+        self.window = tk.Tk()  # 窗口
+        self.window.title('登录到应用拉曼光谱的口腔癌诊断系统(build22714version3.0.0)')  # 窗口标题
+        self.window_width = 600
+        self.window_height = 400
+        self.window.geometry(str(self.window_width) + 'x' + str(self.window_height))  # 加载时初始值
+        self.window.bind('<Configure>', self.window_resize)
+        self.create_widgets()  # 创建组件，在本方法中自定义组件
+        self.master = master  # Frame构造器
+        self.pack()  # 组件定位
+        self.window.update()
+        self.update()
+
+    def window_resize(self, event=None):
+        print('width=%d,height=%d' % (self.window.winfo_width(), self.window.winfo_height()))
+        if event is not None:
+            if self.window_width != self.window.winfo_width() or self.window_height != self.window.winfo_height():
+                if self.window_width != self.window.winfo_width():
+                    self.window_width = self.window.winfo_width()
+                if self.window_height != self.window.winfo_height():
+                    self.window_height = self.window.winfo_height()
+                # 此处等率界面应当设定为不可调节窗口大小
+                # 因此在此处进行长度，宽度的强制更改<强制更改可以使用withdraw,deiconify方法>
+                print('new_width=%d,new_height=%d' % (self.window_width, self.window_height))
+                print('width_outer=%d,height_outer=%d' % (window_width, window_height))
+                self.window.update()
+                self.reset()
+                # self.create_widgets()
+                # self.window.withdraw()
+                # self.window.deiconify()
+                self.create_widgets()
+                # self.window.update()
+
+    def reset(self):
+        # 销毁当前页面所有部件
+        try:
+            self.window.grid_forget()
+        except:
+            print('reset failed')
+
+    def create_widgets(self):
+        """
+        此处创建一个界面，用于显示输入界面
+        :return:
+        """
+        Label0=tk.Label(self.window,text='姓名')
+        Label0.place(x=50,y=50)
+        self.text0=tk.Text(self.window,width=25,height=1)
+        self.text0.place(x=80,y=50)
+        Label1=tk.Label(self.window,text='性别')
+        Label1.place(x=300,y=50)
+        self.text1=tk.Text(self.window,width=25,height=1)
+        self.text1.place(x=350,y=50)
+        Label2=tk.Label(self.window,text='年龄')
+        Label2.place(x=50,y=100)
+        self.text2=tk.Text(self.window,width=25,height=1)
+        self.text2.place(x=80,y=100)
+        Label3=tk.Label(self.window,text='就诊时间')
+        Label3.place(x=300,y=100)
+        self.text3=tk.Text(self.window,width=25,height=1)
+        self.text3.place(x=350,y=100)
+        Label4=tk.Label(self.window,text='患病部位')
+        Label4.place(x=50,y=150)
+        self.text4=tk.Text(self.window,width=25,height=1)
+        self.text4.place(x=80,y=150)
+        Label5=tk.Label(self.window,text='不良嗜好')
+        Label5.place(x=300,y=150)
+        self.text5=tk.Text(self.window,width=25,height=1)
+        self.text5.place(x=350,y=150)
+        button = tk.Button(self.window,text='链接数据库并导入',command=self.action_save,width=25,height=1)
+        button.place(x=200,y=200)
+
+    def action_save(self):
+        global patient_name, patient_gender, patient_age, patient_time, patient_bad, patient_part
+        patient_name = self.text0.get(1.0, tk.END + "-1c")
+        patient_gender = self.text1.get(1.0,tk.END + "-1c")
+        patient_age = self.text2.get(1.0,tk.END + "-1c")
+        patient_time = self.text3.get(1.0,tk.END + "-1c")
+        patient_bad = self.text4.get(1.0,tk.END + "-1c")
+        patient_part = self.text5.get(1.0,tk.END + "-1c")
+        error = 0
+        if patient_name == "":
+            error=error+1
+        if patient_gender == "":
+            error=error+1
+        if patient_age == "":
+            error=error+1
+        if patient_time == "":
+            error=error+1
+        if patient_bad == "":
+            error=error+1
+        if patient_part == "":
+            error=error+1
+        if error == 0:
+            self.window.destroy()
+        else :
+            messagebox.showerror(title='错误',message='信息不能为空')
+
 
 
 if __name__ == '__main__':
