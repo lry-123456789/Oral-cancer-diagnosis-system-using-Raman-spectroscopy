@@ -16,7 +16,20 @@ version 1.0.0(sp7)<setup7.exe> is end of support
 
 2022.7.12
 version 2.0.0 begin to build
+
+2022.7.16
+version 3.0.0 begin to build <graphical interface is powered by tkinter>
+version 2.0.0 is end of support
+
+2022.7.21
+version 4.0.0 begin to build <graphical interface is powered by Qt creator>
+version 3.0.0 <graphical interface is powered by tkinter> is end of support
+
 ---------------------------------------------------------------------------
 project member:
 author:     lry-123456789
 maintainer: lry-123456789
+
+---------------------------------------------------------------------------
+update time:
+2022.7.21 1:00(UTC+8)
