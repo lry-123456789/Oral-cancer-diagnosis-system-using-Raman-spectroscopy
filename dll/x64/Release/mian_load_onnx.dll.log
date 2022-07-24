@@ -1,0 +1,38 @@
+﻿  mydll.cpp
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(36,12): warning C4101: “max”: 未引用的局部变量
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(36,17): warning C4101: “min”: 未引用的局部变量
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(204,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(369,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(534,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(699,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(864,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(1029,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(1194,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(1359,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(1524,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(1689,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(1854,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(2019,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(2184,26): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+    正在创建库 C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Release\mian_load_onnx.dll.lib 和对象 C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Release\mian_load_onnx.dll.exp
+mian_load_onnx.dll.exp : warning LNK4070: .EXP 中的 /OUT:dll_load_model.dll 指令与输出文件名“C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Release\mian_load_onnx.dll.dll”不同；忽略指令
+  正在生成代码
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(2027): warning C4172: 返回局部变量或临时变量的地址: out
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(1697): warning C4172: 返回局部变量或临时变量的地址: out
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(2192): warning C4172: 返回局部变量或临时变量的地址: out
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(1202): warning C4172: 返回局部变量或临时变量的地址: out
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(1367): warning C4172: 返回局部变量或临时变量的地址: out
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(1532): warning C4172: 返回局部变量或临时变量的地址: out
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(1862): warning C4172: 返回局部变量或临时变量的地址: out
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(1037): warning C4172: 返回局部变量或临时变量的地址: out
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(872): warning C4172: 返回局部变量或临时变量的地址: out
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(707): warning C4172: 返回局部变量或临时变量的地址: out
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(377): warning C4172: 返回局部变量或临时变量的地址: out
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(542): warning C4172: 返回局部变量或临时变量的地址: out
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(212): warning C4172: 返回局部变量或临时变量的地址: out
+  13 of 192 functions ( 6.8%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  已完成代码的生成
+mian_load_onnx.dll.exp : warning LNK4070: .EXP 中的 /OUT:dll_load_model.dll 指令与输出文件名“C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Release\mian_load_onnx.dll.dll”不同；忽略指令
+  mian_load_onnx.dll.vcxproj -> C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Release\mian_load_onnx.dll.dll

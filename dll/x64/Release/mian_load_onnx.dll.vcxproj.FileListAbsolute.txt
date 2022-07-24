@@ -1,0 +1,5 @@
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Release\onnxruntime.dll
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Release\onnxruntime_providers_shared.dll
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Release\onnxruntime_providers_cuda.dll
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Release\onnxruntime_providers_tensorrt.dll
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Release\mian_load_onnx.dll.dll
