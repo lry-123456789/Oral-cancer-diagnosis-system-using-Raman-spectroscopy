@@ -25,6 +25,11 @@ version 2.0.0 is end of support
 version 4.0.0 begin to build <graphical interface is powered by Qt creator>
 version 3.0.0 <graphical interface is powered by tkinter> is end of support
 
+NEWS!
+2022.7.24
+version 5.0.0 begin to use <graphical interface is powered by Qt creator>
+version 4.0.0 <graphical interface is powered by Qt creator> is end of support
+version 5.0.0 will release today!
 ---------------------------------------------------------------------------
 project member:
 author:     lry-123456789
