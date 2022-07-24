@@ -1,0 +1,5 @@
+D:\Users\HUAWEI\source\repos\ONNXtest\x64\Release\onnxruntime.dll
+D:\Users\HUAWEI\source\repos\ONNXtest\x64\Release\onnxruntime_providers_shared.dll
+D:\Users\HUAWEI\source\repos\ONNXtest\x64\Release\onnxruntime_providers_cuda.dll
+D:\Users\HUAWEI\source\repos\ONNXtest\x64\Release\onnxruntime_providers_tensorrt.dll
+D:\Users\HUAWEI\source\repos\ONNXtest\x64\Release\ONNXtest.exe
