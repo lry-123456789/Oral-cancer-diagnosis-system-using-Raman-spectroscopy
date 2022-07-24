@@ -1,0 +1,9 @@
+﻿  pch.cpp
+  dllmain.cpp
+  mydll.cpp
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(35,12): warning C4101: “max”: 未引用的局部变量
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(35,17): warning C4101: “min”: 未引用的局部变量
+  正在生成代码...
+C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\mydll.cpp(47): warning C4172: 返回局部变量或临时变量的地址: out
+    正在创建库 C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Debug\mian_load_onnx.dll.lib 和对象 C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Debug\mian_load_onnx.dll.exp
+  mian_load_onnx.dll.vcxproj -> C:\Users\HUAWEI\Desktop\dachuang\dll\mian_load_onnx.dll\x64\Debug\mian_load_onnx.dll.dll
